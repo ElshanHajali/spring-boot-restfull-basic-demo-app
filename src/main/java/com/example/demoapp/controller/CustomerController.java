@@ -42,6 +42,12 @@ public class CustomerController {
         return "Customer is updated!"+customer.toString();
     }
 
+    @PutMapping("/customer/{id}")
+    public String updateCustomer(@PathVariable Long id, @RequestBody Customer customer){
+        customerService.update(customer, id);
+        return "Customer is Successfully UPDATED!";
+    }
+
     @DeleteMapping("/customer/{id}")
     public String deleteCustomer(@PathVariable Long id){
         if(customerService.getCustomerById(id)==null)

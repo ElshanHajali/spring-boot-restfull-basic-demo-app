@@ -28,6 +28,22 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
+    public void update(Customer newCustomer, Long id) {
+        Customer oldCustomer = customerRepository.getCustomerById(id);
+        if(oldCustomer.getId() != null){
+            if(newCustomer.getFirstName() == null)
+                newCustomer.setFirstName(oldCustomer.getFirstName());
+
+            if(newCustomer.getLastName() == null)
+                newCustomer.setLastName(oldCustomer.getLastName());
+
+            if(newCustomer.getEmail() == null)
+                newCustomer.setEmail(oldCustomer.getEmail());
+            customerRepository.save(newCustomer);
+        }
+    }
+
+    @Override
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
     }
